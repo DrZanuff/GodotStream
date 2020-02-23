@@ -1,17 +1,13 @@
-extends Node
+extends MarginContainer
 
-#var link = "https://ia800203.us.archive.org/22/items/quran_960/038.ogg"
-#var link = "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/105112/1974778?GoogleAccessId=uploader@moonscript2.iam.gserviceaccount.com&Expires=1582274878&Signature=Cf9iQg07eLwmG5%2FzncEBzJth3ax0V%2FuuM2HNrWZUxtTd6MKTgmIgVefCszw36xisB1lYqeYT4dp%2BV0P4letVL8LGClGZ5Ibvh9Fa0ujnmV8jX9fpVSGnGaVlabBNCXF2xAmzxfts6KU4BkAfE3f%2BDj87VzI%2BMI77MFqm3fBq%2BD9wRvO3M5n4TqsL0uEMnF6%2B126N0ajQuJYyH7bL%2B03pNbXFu3IOSppstmkMbk%2Fy26mUPTMYQtaYvH9qk40QRR8uO5vf2%2FqnGj72yjVhxtiINWQQp%2B3tKiW01OGt17HPQI7HgYBWeSqcbKPTUIX4UbliY9HczpWiJq%2Bh0%2FHmJsjeEQ==&hwexp=1582275138&hwsig=4bee42396060d6424f96ede1fa3614a3"
-#var link =  "https://srv-file10.gofile.io/download/QhkHfG/Sound.ogg"
-#var link =  "https://raw.githubusercontent.com/DrZanuff/NoHumansInSpace/master/Sound.ogg"
-#var link =  "https://send.mu/file/download/er5oI/BY8VTN"
 var link = ""
 
 const BYTES = 8192 #8kb
-
 var buffer : PoolByteArray = PoolByteArray() #buffer da data
+var http = HTTPClient.new()
+var close_stream = false
 
-func _ready() -> void:
+func _play() -> void:
 
 	var thread_buffer = Thread.new()
 	thread_buffer.start(self,"_stream")
@@ -19,6 +15,13 @@ func _ready() -> void:
 	var thread_start = Thread.new()
 	thread_start.start(self,"start_stream")
 
+func _stop():
+	var sound = AudioStreamOGGVorbis.new()
+	buffer = PoolByteArray()
+	sound.data = buffer
+	$AudioStreamPlayer.stream = sound
+	http.close()
+	close_stream = true
 
 func start_stream(p):
 	while len(buffer) < BYTES:
@@ -42,8 +45,6 @@ func _stream(p):
 	var use_ssl = link.find("https://") > -1 #Verifica se o host é seguro
 	var file = link.substr(stop, len(link)) #O arquivo que vamos acessar dentro do Host
 	
-
-	var http = HTTPClient.new()
 	var error = http.connect_to_host(host,-1,use_ssl)
 	
 	
@@ -72,6 +73,6 @@ func _stream(p):
 			else:
 				buffer.append_array(chunk)
 
+
 func _on_AudioStreamPlayer_finished() -> void:
-	print( $AudioStreamPlayer.get_playback_position()  )
 	play_buffer( $AudioStreamPlayer.get_playback_position() )
