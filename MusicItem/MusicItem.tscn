@@ -1,0 +1,116 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://MusicItem/MusicItem.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0313726, 0.113725, 1, 1 )
+
+[node name="MusicItem" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.213
+margin_bottom = 0.199989
+rect_min_size = Vector2( 0, 128 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 128.0
+
+[node name="Off" type="Panel" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 121.0
+
+[node name="Select" type="Panel" parent="PanelContainer"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 121.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="OuterMargin" type="MarginContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 121.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="PC" type="PanelContainer" parent="PanelContainer/OuterMargin"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 990.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="PanelContainer/OuterMargin/PC"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 963.0
+margin_bottom = 87.0
+
+[node name="ItemBody" type="HBoxContainer" parent="PanelContainer/OuterMargin/PC"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 963.0
+margin_bottom = 87.0
+
+[node name="TextureMargin" type="MarginContainer" parent="PanelContainer/OuterMargin/PC/ItemBody"]
+margin_right = 157.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/OuterMargin/PC/ItemBody/TextureMargin"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 152.0
+margin_bottom = 75.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/OuterMargin/PC/ItemBody"]
+margin_left = 161.0
+margin_right = 165.0
+margin_bottom = 80.0
+
+[node name="TextMargin" type="MarginContainer" parent="PanelContainer/OuterMargin/PC/ItemBody"]
+margin_left = 169.0
+margin_right = 956.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Label" type="Label" parent="PanelContainer/OuterMargin/PC/ItemBody/TextMargin"]
+margin_left = 50.0
+margin_right = 737.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet. Feat Consectetur adipiscing elit. Donec sodales finibus velit"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

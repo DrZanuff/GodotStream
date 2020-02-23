@@ -6,4 +6,56 @@
 script = ExtResource( 1 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="MainBody" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PC" type="PanelContainer" parent="MainBody"]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Panel" type="Panel" parent="MainBody/PC"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="BodyMargin" type="MarginContainer" parent="MainBody/PC"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="Body" type="VBoxContainer" parent="MainBody/PC/BodyMargin"]
+margin_right = 1010.0
+margin_bottom = 586.0
+
+[node name="Player" type="MarginContainer" parent="MainBody/PC/BodyMargin/Body"]
+margin_right = 1010.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="MainBody/PC/BodyMargin/Body"]
+margin_top = 118.0
+margin_right = 1010.0
+margin_bottom = 122.0
+
+[node name="List" type="ScrollContainer" parent="MainBody/PC/BodyMargin/Body"]
+margin_top = 126.0
+margin_right = 1010.0
+margin_bottom = 586.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Musics" type="GridContainer" parent="MainBody/PC/BodyMargin/Body/List"]
+margin_right = 1010.0
+margin_bottom = 460.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
