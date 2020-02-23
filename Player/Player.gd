@@ -6,6 +6,13 @@ const BYTES = 8192 #8kb
 var buffer : PoolByteArray = PoolByteArray() #buffer da data
 var http = HTTPClient.new()
 var close_stream = false
+var duration = 0
+
+func _process(delta: float) -> void:
+	printt(
+		"Playback: " + str($AudioStreamPlayer.get_playback_position() ) , 
+		"Duration: " + str(duration)
+	)
 
 func _play() -> void:
 
@@ -36,6 +43,7 @@ func play_buffer(pos = 0):
 	$AudioStreamPlayer.stream = sound
 	$AudioStreamPlayer.play(pos)
 	
+
 
 func _stream(p):
 	var start = link.find("://") + 3
@@ -75,4 +83,8 @@ func _stream(p):
 
 
 func _on_AudioStreamPlayer_finished() -> void:
-	play_buffer( $AudioStreamPlayer.get_playback_position() )
+	if $AudioStreamPlayer.get_playback_position() < int(duration):
+		play_buffer( $AudioStreamPlayer.get_playback_position() )
+	else:
+		$AudioStreamPlayer.stop()
+		#emit signal here

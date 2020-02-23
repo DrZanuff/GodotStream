@@ -64,28 +64,19 @@ func enable_stop(b : bool):
 	$MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Stop.disabled = !b
 
 func _on_Play_pressed() -> void:
-	if is_playing == false:
-		enable_stop(true)
-		play_values.name = select_values.name
-		play_values.link = select_values.link
-		play_values.duration = play_values.duration
-		play_values.cover = play_values.cover
-		$MainBody/PC/BodyMargin/Body/Player.link = play_values.link 
-		$MainBody/PC/BodyMargin/Body/Player._play()
-		$MainBody/PC/BodyMargin/Body/Player/Options/Playing/TrackInfo/TrackName.text = play_values.name
-		is_playing = true
-	else:
+	if is_playing == true:
 		$MainBody/PC/BodyMargin/Body/Player._stop()
-		enable_stop(true)
-		play_values.name = select_values.name
-		play_values.link = select_values.link
-		play_values.duration = play_values.duration
-		play_values.cover = play_values.cover
-		$MainBody/PC/BodyMargin/Body/Player.link = play_values.link 
-		$MainBody/PC/BodyMargin/Body/Player._play()
-		$MainBody/PC/BodyMargin/Body/Player/Options/Playing/TrackInfo/TrackName.text = play_values.name
-		is_playing = true
-		
+	enable_stop(true)
+	play_values.name = select_values.name
+	play_values.link = select_values.link
+	play_values.duration = select_values.duration
+	play_values.cover = select_values.cover
+	$MainBody/PC/BodyMargin/Body/Player.link = play_values.link 
+	$MainBody/PC/BodyMargin/Body/Player._play()
+	$MainBody/PC/BodyMargin/Body/Player.duration = play_values.duration
+	$MainBody/PC/BodyMargin/Body/Player/Options/Playing/TrackInfo/TrackName.text = play_values.name
+	is_playing = true
+
 
 func _on_Stop_pressed() -> void:
 	$MainBody/PC/BodyMargin/Body/Player._stop()
