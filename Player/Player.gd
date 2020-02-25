@@ -8,11 +8,13 @@ var http = HTTPClient.new()
 var close_stream = false
 var duration = 0
 
-func _process(delta: float) -> void:
-	printt(
-		"Playback: " + str($AudioStreamPlayer.get_playback_position() ) , 
-		"Duration: " + str(duration)
-	)
+signal track_finished
+
+#func _process(delta: float) -> void:
+#	printt(
+#		"Playback: " + str($AudioStreamPlayer.get_playback_position() ) , 
+#		"Duration: " + str(duration)
+#	)
 
 func _play() -> void:
 
@@ -87,4 +89,4 @@ func _on_AudioStreamPlayer_finished() -> void:
 		play_buffer( $AudioStreamPlayer.get_playback_position() )
 	else:
 		$AudioStreamPlayer.stop()
-		#emit signal here
+		emit_signal("track_finished")

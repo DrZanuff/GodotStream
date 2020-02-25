@@ -6,6 +6,12 @@ var music_item = load("res://MusicItem/MusicItem.tscn")
 onready var musicList = $MainBody/PC/BodyMargin/Body/List/Musics 
 var is_playing = false
 
+enum TYPE{RANDOM,ORDER}
+export (TYPE) var mode 
+var random_list = []
+
+var current_track = 0
+
 var select_values = {
 	"name":"",
 	"link":"",
@@ -52,6 +58,7 @@ func item_select(n):
 	select_values.duration = musicList.get_child(n).values.duration
 	select_values.cover = musicList.get_child(n).values.cover
 	$MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/TextM/TrackText.text = select_values.name
+	current_track = n
 
 func deselect_all():
 	for i in musicList.get_children():
@@ -83,3 +90,34 @@ func _on_Stop_pressed() -> void:
 	enable_stop(false)
 	is_playing = false
 
+func _on_Player_track_finished() -> void:
+	current_track += 1
+	if current_track > musicList.get_child_count()-1:
+		current_track = 0
+		
+	if mode == TYPE.ORDER:
+		item_select(current_track)
+	elif mode == TYPE.RANDOM:
+		item_select( random_list[current_track] )
+
+	var player = $MainBody/PC/BodyMargin/Body/Player
+	player.get_node("Options/Select/PC/Body/Play").emit_signal("pressed")
+
+
+func randomize_list():
+	random_list.clear()
+	
+	for n in range( musicList.get_child_count() ):
+		random_list.push_back(n)
+	
+	randomize()
+	random_list.shuffle()
+
+
+func _on_RandomButton_toggled(button_pressed: bool) -> void:
+	if button_pressed == true:
+		mode = TYPE.RANDOM
+		randomize_list()
+	else:
+		mode = TYPE.ORDER
+	print(random_list)
