@@ -47,6 +47,7 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			new_music_item.get_node("Button").connect(
 				"pressed",self,"item_select",[n]
 				)
+	$MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Refresh.disabled = false
 	
 
 func item_select(n):
@@ -121,3 +122,19 @@ func _on_RandomButton_toggled(button_pressed: bool) -> void:
 	else:
 		mode = TYPE.ORDER
 	print(random_list)
+
+
+func _on_Refresh_pressed() -> void:
+	$MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Refresh.disabled = true
+	
+	for n in musicList.get_children():
+		n.queue_free()
+	
+	$MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/TextM/TrackText.text = ""
+	
+	var headers = [
+	"User-Agent: Pirulo/1.0 (Godot)",
+	"Accept: */*"
+	]
+	
+	$HTTPRequest.request(link,headers)

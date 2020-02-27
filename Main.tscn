@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Images/Stop.svg" type="Texture" id=2]
 [ext_resource path="res://Images/Play.svg" type="Texture" id=3]
 [ext_resource path="res://Player/Player.gd" type="Script" id=4]
+[ext_resource path="res://Images/Loop.svg" type="Texture" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -121,7 +122,7 @@ margin_right = 1003.0
 margin_bottom = 47.0
 
 [node name="Play" type="Button" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_right = 104.0
+margin_right = 99.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 disabled = true
@@ -130,13 +131,13 @@ icon = ExtResource( 3 )
 align = 0
 
 [node name="VSeparator" type="VSeparator" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_left = 108.0
-margin_right = 112.0
+margin_left = 103.0
+margin_right = 107.0
 margin_bottom = 40.0
 
 [node name="Stop" type="Button" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_left = 116.0
-margin_right = 220.0
+margin_left = 111.0
+margin_right = 210.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 disabled = true
@@ -145,13 +146,13 @@ icon = ExtResource( 2 )
 align = 0
 
 [node name="VSeparator2" type="VSeparator" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_left = 224.0
-margin_right = 228.0
+margin_left = 214.0
+margin_right = 218.0
 margin_bottom = 40.0
 
 [node name="TextM" type="MarginContainer" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_left = 232.0
-margin_right = 859.0
+margin_left = 222.0
+margin_right = 819.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -161,7 +162,7 @@ custom_constants/margin_left = 5
 
 [node name="TrackText" type="Label" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/TextM"]
 margin_left = 5.0
-margin_right = 622.0
+margin_right = 592.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -170,10 +171,22 @@ valign = 1
 autowrap = true
 
 [node name="RandomButton" type="CheckButton" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
-margin_left = 863.0
-margin_right = 995.0
+margin_left = 823.0
+margin_right = 955.0
 margin_bottom = 40.0
 text = "Random"
+
+[node name="VSeparator3" type="VSeparator" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
+margin_left = 959.0
+margin_right = 963.0
+margin_bottom = 40.0
+
+[node name="Refresh" type="Button" parent="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body"]
+margin_left = 967.0
+margin_right = 995.0
+margin_bottom = 40.0
+disabled = true
+icon = ExtResource( 5 )
 
 [node name="HSeparator" type="HSeparator" parent="MainBody/PC/BodyMargin/Body"]
 margin_top = 118.0
@@ -200,3 +213,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Stop" to="." method="_on_Stop_pressed"]
 [connection signal="toggled" from="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/RandomButton" to="." method="_on_RandomButton_toggled"]
+[connection signal="pressed" from="MainBody/PC/BodyMargin/Body/Player/Options/Select/PC/Body/Refresh" to="." method="_on_Refresh_pressed"]
