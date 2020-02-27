@@ -10,12 +10,6 @@ var duration = 0
 
 signal track_finished
 
-#func _process(delta: float) -> void:
-#	printt(
-#		"Playback: " + str($AudioStreamPlayer.get_playback_position() ) , 
-#		"Duration: " + str(duration)
-#	)
-
 func _play() -> void:
 
 	var thread_buffer = Thread.new()
@@ -48,6 +42,7 @@ func play_buffer(pos = 0):
 
 
 func _stream(p):
+	#p is the link for the sound in FireBase
 	var start = link.find("://") + 3
 	var stop  = link.find("/" , start )
 	

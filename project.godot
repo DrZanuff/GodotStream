@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Sound Stream"
+config/name="Godot Stream"
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://icon.png"
 boot_splash/fullsize=false
@@ -28,5 +28,6 @@ System="*res://System.gd"
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_clear_color=Color( 0.0470588, 0.0588235, 0.133333, 1 )
 environment/default_environment="res://default_env.tres"
