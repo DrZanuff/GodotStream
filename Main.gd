@@ -35,6 +35,12 @@ func _ready() -> void:
 	
 	$HTTPRequest.request(link,headers)
 
+func _process(delta: float) -> void:
+	if is_playing:
+		var t =$MainBody/PC/BodyMargin/Body/Player/Options/Playing/TrackInfo/HB/Time
+		var m = $MainBody/PC/BodyMargin/Body/Player/AudioStreamPlayer.get_playback_position()
+		t.text = System.convert_time(int(m)) + " | " + System.convert_time(int(play_values.duration))
+
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var playlist = JSON.parse( body.get_string_from_utf8() ).result

@@ -17,8 +17,16 @@ _global_script_class_icons={
 
 config/name="Sound Stream"
 run/main_scene="res://Main.tscn"
+boot_splash/image="res://icon.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.117647, 0.290196, 0.811765, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+System="*res://System.gd"
 
 [rendering]
 
+environment/default_clear_color=Color( 0.0470588, 0.0588235, 0.133333, 1 )
 environment/default_environment="res://default_env.tres"
